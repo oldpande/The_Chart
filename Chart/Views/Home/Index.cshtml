@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <title>The Chart</title>
+  <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+  @Scripts.Render("~/scripts/jquery-3.3.1.js")
+  @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+  <script type="text/javascript">
+
+    function OnSuccess() {
+
+      var results = $('chartContainer');
+      results.empty();
+
+      var dataPoints = [];
+      
+      for (var i = 0; i < data.length; i++) {
+        dataPoints.push({
+          x: new Date(data[i].x),
+          y: data[i].y
+        });
+      }
+
+      var chart = new CanvasJS.Chart(results, {
+        animationEnabled: true,
+        theme: "light2",
+        axisY: {
+          includeZero: true,
+        },
+        data: [{
+          type: "spline",
+          yValueFormatString: "##,###",
+          dataPoints: dataPoints
+        }]
+      });
+
+      chart.render();
+    }
+  </script>
+
+</head>
+<body>
+  <div name="chartContainer" style="height: 370px; width: 50rem;"></div>
+  <div class="input_data">
+    @using (Ajax.BeginForm("DataChart", new AjaxOptions { OnSuccess = "OnSuccess" }))
+    {
+      <table>
+        <tr>
+          <td>Function: </td>
+          <td> y = </td>
+          <td class="input"><input type="text" name="a" /></td>
+          <td> x^2 + </td>
+          <td class="input"><input type="text" name="b" /></td>
+          <td> x + </td>
+          <td class="input"><input type="text" name="c" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Step: </td>
+          <td class="input"><input type="text" name="Step" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>From: </td>
+          <td class="input"><input type="text" name="RangeFrom" /></td>
+          <td> to </td>
+          <td class="input"><input type="text" name="RangeTo" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <input type="submit" value="Plot" class="plot" id="btnGet" />
+    }
+  </div>
+</body>
+</html>

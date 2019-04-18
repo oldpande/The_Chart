@@ -1,0 +1,40 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.chart{
+    text-align: center;
+
+}
+
+table {
+  text-align: left;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  border: 1px solid;
+}
+
+td {
+  border: 1px solid;
+  height: 20px;
+  width: 40px;
+}
+
+input {
+  border: 0;
+  width: 32px;
+}
+
+.plot{
+  width: 100px;
+  height: 60px;
+  border-radius: 16px;
+}
+
+.input {
+  border: 3px solid;
+}
